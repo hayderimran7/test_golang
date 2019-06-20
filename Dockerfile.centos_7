@@ -1,0 +1,16 @@
+FROM centos:7
+
+ARG GO_VER=1.11
+
+RUN yum update -y
+
+########
+# go
+########
+WORKDIR /usr/local/src
+RUN yum install -y git
+RUN curl -O https://dl.google.com/go/go${GO_VER}.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go${GO_VER}.linux-amd64.tar.gz && rm go${GO_VER}.linux-amd64.tar.gz
+ENV GOPATH=/code
+ENV PATH=$PATH:$GOPATH/bin
+ENV PATH=$PATH:/usr/local/go/bin
